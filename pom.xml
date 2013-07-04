@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <modelVersion>4.0.0</modelVersion>
+    <name>EnContRA</name>
+    <packaging>pom</packaging>
+
+    <groupId>pt.inevo.encontra</groupId>
+    <artifactId>encontra</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <issueManagement>
+        <system>Redmine</system>
+        <url>https://inevo-apps.sourcerepo.com/redmine/inevo/projects/encontra</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>hudson</system>
+        <url>http://jenkins.inevo.pt</url>
+    </ciManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>EnContrRA</name>
+            <post>encontra@inevo.pt</post>
+        </mailingList>
+    </mailingLists>
+
+    <scm>
+        <developerConnection>scm:git@inevo.sourcerepo.com:inevo/encontra.git</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>encontra</id>
+            <name>Encontra Releases</name>
+            <url>http://nexus.inevo.pt/content/repositories/encontra</url>
+        </repository>
+        <snapshotRepository>
+            <id>encontra-snapshots</id>
+            <name>Encontra Snapshots</name>
+            <url>http://nexus.inevo.pt/content/repositories/encontra-snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>encontra.inevo.pt</id>
+            <url>scp://inevo.pt/var/www/encontra.inevo.pt/htdocs</url>
+        </site>
+    </distributionManagement>
+
+    <properties>
+        <compileSource>1.6</compileSource>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${compileSource}</source>
+                    <target>${compileSource}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!--goal>generateStubs</goal>
+                            <goal>compile</goal-->
+                            <goal>generateTestStubs</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+    <reporting>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <argLine>-Xms512m -Xmx512m</argLine>
+                </configuration>
+
+            </plugin>
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <stylesheet>maven</stylesheet>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <id>uml</id>
+                        <configuration>
+                            <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                            <docletArtifact>
+                                <groupId>org.umlgraph</groupId>
+                                <artifactId>doclet</artifactId>
+                                <version>5.1</version>
+                            </docletArtifact>
+                            <additionalparam>-views</additionalparam>
+                            <!--destDir>target/uml</destDir-->
+                            <show>private</show>
+                        </configuration>
+                        <reports>
+                            <!--report>aggregate</report-->
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <targetJdk>${compileSource}</targetJdk>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>2.0.1</version>
+            </plugin>
+        </plugins>
+    </reporting>
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.gmaven.runtime</groupId>
+            <artifactId>gmaven-runtime-1.7</artifactId>
+            <version>1.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>1.7.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+    </dependencies>
+    <repositories>
+        <repository>
+            <id>encontra</id>
+            <url>http://nexus.inevo.pt/content/repositories/encontra</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>encontra-snapshots</id>
+            <url>http://nexus.inevo.pt/content/repositories/encontra-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>thirdparty</id>
+            <url>http://nexus.inevo.pt/content/repositories/thirdparty</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>imagej</id>
+            <url>http://dev.imagejdev.org:8081/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>Akka</id>
+            <name>Akka Maven2 Repository</name>
+            <url>http://akka.io/repository/</url>
+        </repository>
+        <repository>
+            <id>Multiverse</id>
+            <name>Multiverse Maven2 Repository</name>
+            <url>http://multiverse.googlecode.com/svn/maven-repository/releases/</url>
+        </repository>
+        <repository>
+            <id>GuiceyFruit</id>
+            <name>GuiceyFruit Maven2 Repository</name>
+            <url>http://guiceyfruit.googlecode.com/svn/repo/releases/ </url>
+        </repository>
+    </repositories>
+    <modules>
+        <module>encontra-core-api</module>
+        <module>encontra-core</module>
+        <module>encontra-storage</module>
+        <module>encontra-convert</module>
+        <module>encontra-graph</module>
+        <module>encontra-geometry</module>
+        <module>encontra-service</module>
+        <module>encontra-drawing</module>
+        <module>encontra-webapp</module>
+        <module>encontra-index</module>
+        <module>encontra-image</module>
+        <module>encontra-music</module>
+	<module>encontra-metadata</module>
+    </modules>
+
+</project>

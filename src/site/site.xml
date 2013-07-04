@@ -1,0 +1,30 @@
+<project name="EnContRA">
+    <version position="right"/>
+    <bannerLeft>
+        <name>inEvo</name>
+        <src>http://encontra.inevo.pt/images/Logo-inEvo.jpg</src>
+        <href>http://www.inevo.pt</href>
+    </bannerLeft>
+    <bannerRight>
+        <name>ColaDI</name>
+        <src>http://encontra.inevo.pt/images/logotrans.png</src>
+        <href>http://coladi.inevo.pt</href>
+    </bannerRight>
+    <body>
+        <menu name="EnContRA">
+            <item name="Overview" href="index.html"/>
+            <item name="Features" href="features.html"/>
+            <item name="Installation" href="installation.html"/>
+            <item name="Configuration" href="configuration.html"/>
+            <item name="FAQ" href="faq.html"/>
+            <item name="Sequence Diagrams" href="sequence.html"/>
+            <item name="Developer Resources" href="/developer/index.html" collapse="true">
+                <item name="System Architecture" href="/developer/architecture.html"/>                
+                <item name="Embedder's Guide" href="/developer/embedding.html"/>
+            </item>
+        </menu>
+        <menu ref="parent" />
+        <menu ref="reports"/>
+        <menu ref="modules" />
+    </body>
+</project>
