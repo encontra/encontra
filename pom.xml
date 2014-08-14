@@ -43,7 +43,7 @@
     </distributionManagement>
 
     <properties>
-        <compileSource>1.6</compileSource>
+        <compileSource>1.7</compileSource>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <github.global.server>github</github.global.server>
     </properties>
@@ -236,8 +236,9 @@
         <module>encontra-index</module>
         <module>encontra-image</module>
         <module>encontra-music</module>
-	    <module>encontra-metadata</module>
+        <module>encontra-metadata</module>
         <!-- module>encontra-webapp</module -->
-    </modules>
+        <module>encontra-rest</module>
+  </modules>
 
 </project>
