@@ -44,8 +44,23 @@
 
     <properties>
         <compileSource>1.7</compileSource>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <github.global.server>github</github.global.server>
+        <jogl.version>2.2.0-rc-20140613</jogl.version>
+        <lucene.version>3.0.2</lucene.version>
+        <lire.version>0.8</lire.version>
+        <cali.version>1.0</cali.version>
+        <kabeja.version>0.4.1</kabeja.version>
+        <psd.version>2.0-SNAPSHOT</psd.version>
+        <batik.version>1.7</batik.version>
+        <tika.version>0.9</tika.version>
+        <xmp.version>5.1.2</xmp.version>
+        <akka.version>1.0-RC1</akka.version>
+        <jung.version>2.0.1</jung.version>
+        <jdbm.version>1.0</jdbm.version>
+        <imagej.version>1.43u</imagej.version>
+        <chemistry.version>0.5.0</chemistry.version>
+        <sl4j.version>1.6.0</sl4j.version>
     </properties>
 
     <build>
@@ -56,29 +71,15 @@
                 <configuration>
                     <source>${compileSource}</source>
                     <target>${compileSource}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.gmaven</groupId>
-                <artifactId>gmaven-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <!--goal>generateStubs</goal>
-                            <goal>compile</goal-->
-                            <goal>generateTestStubs</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.7</version>
                 <configuration>
-                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo
+                    </altDeploymentRepository>
                 </configuration>
             </plugin>
             <plugin>
@@ -86,23 +87,25 @@
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.8</version>
                 <configuration>
-                    <message>Maven artifacts for ${project.artifactId} - ${project.version}</message> 
+                    <message>Maven artifacts for ${project.artifactId} - ${project.version}</message>
                     <noJekyll>true</noJekyll>
                     <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
                     <branch>refs/heads/mvn-repo</branch>
-                    <includes><include>**/*</include></includes>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
                     <repositoryName>encontra</repositoryName>
                     <repositoryOwner>encontra</repositoryOwner>
                     <merge>true</merge>
                     <dryRun>true</dryRun>
                 </configuration>
                 <executions>
-                  <execution>
-                    <goals>
-                      <goal>site</goal>
-                    </goals>
-                    <phase>deploy</phase>
-                  </execution>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
@@ -116,17 +119,11 @@
                 <version>2.5</version>
                 <configuration>
                     <argLine>-Xms512m -Xmx512m</argLine>
+                    <systemPropertyVariables>
+                        <java.awt.headless>true</java.awt.headless>
+                    </systemPropertyVariables>
                 </configuration>
-
             </plugin>
-            <!--plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -165,40 +162,287 @@
                     <targetJdk>${compileSource}</targetJdk>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>2.0.1</version>
-            </plugin>
         </plugins>
     </reporting>
-    <dependencies>
-        <dependency>
-            <groupId>org.codehaus.gmaven.runtime</groupId>
-            <artifactId>gmaven-runtime-1.7</artifactId>
-            <version>1.2</version>
-            <scope>test</scope>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!-- EnContRA -->
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-core-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-convert-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-convert-svg</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-drawing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-geometry</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-graph-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-image-descriptors</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-image-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-lucene-index</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-metadata-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-metadata-psd</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>1.7.0</version>
-            <scope>test</scope>
-        </dependency>
+            <!-- Lucene -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-core</artifactId>
+                <version>${lucene.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.0.Final</version>
-        </dependency>
-    </dependencies>
+            <!-- LIRE -->
+            <dependency>
+                <groupId>net.semanticmetadata</groupId>
+                <artifactId>lire-imageanalysis</artifactId>
+                <version>${lire.version}</version>
+            </dependency>
+
+            <!-- CALI -->
+            <dependency>
+                <groupId>jCALI</groupId>
+                <artifactId>jCALI</artifactId>
+                <version>${cali.version}</version>
+            </dependency>
+
+            <!-- Kabeja -->
+            <dependency>
+                <groupId>org.kabeja</groupId>
+                <artifactId>kabeja</artifactId>
+                <version>${kabeja.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kabeja</groupId>
+                <artifactId>kabeja-svg</artifactId>
+                <version>${kabeja.version}</version>
+            </dependency>
+
+            <!-- PSD Library -->
+            <dependency>
+                <groupId>psd-library</groupId>
+                <artifactId>psd-image</artifactId>
+                <version>${psd.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>psd-library</groupId>
+                <artifactId>psd-parser</artifactId>
+                <version>${psd.version}</version>
+            </dependency>
+
+            <!-- Batik -->
+            <dependency>
+                <groupId>org.apache.xmlgraphics</groupId>
+                <artifactId>batik-codec</artifactId>
+                <version>${batik.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.xmlgraphics</groupId>
+                <artifactId>batik-transcoder</artifactId>
+                <version>${batik.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.xmlgraphics</groupId> <!-- TODO - Remove this dependency -->
+                <artifactId>batik-swing</artifactId>
+                <version>${batik.version}</version>
+            </dependency>
+
+            <!-- Apache Tika -->
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-core</artifactId>
+                <version>${tika.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-parsers</artifactId>
+                <version>${tika.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.adobe.xmp</groupId>
+                <artifactId>xmpcore</artifactId>
+                <version>${xmp.version}</version>
+            </dependency>
+
+            <!-- Akka -->
+            <dependency>
+                <groupId>se.scalablesolutions.akka</groupId>
+                <artifactId>akka-actor</artifactId>
+                <version>${akka.version}</version>
+            </dependency>
+
+            <!-- JUNG -->
+            <dependency>
+                <groupId>net.sf.jung</groupId>
+                <artifactId>jung-graph-impl</artifactId>
+                <version>${jung.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.jung</groupId>
+                <artifactId>jung-algorithms</artifactId>
+                <version>${jung.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.jung</groupId>
+                <artifactId>jung-visualization</artifactId>
+                <version>${jung.version}</version>
+            </dependency>
+
+            <!-- NBTree -->
+            <dependency>
+                <groupId>jdbm</groupId>
+                <artifactId>jdbm</artifactId>
+                <version>${jdbm.version}</version>
+            </dependency>
+
+           <!-- ImageJ -->
+            <dependency>
+                <groupId>net.imagej</groupId>
+                <artifactId>ij</artifactId>
+                <version>${imagej.version}</version>
+            </dependency>
+
+            <!-- Apache Chemistry -->
+            <dependency>
+                <groupId>org.apache.chemistry.opencmis</groupId>
+                <artifactId>chemistry-opencmis-client-impl</artifactId>
+                <version>${chemistry.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.chemistry.opencmis</groupId>
+                <artifactId>chemistry-opencmis-server-support</artifactId>
+                <version>${chemistry.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.chemistry.opencmis</groupId>
+                <artifactId>chemistry-opencmis-server-inmemory</artifactId>
+                <version>${chemistry.version}</version>
+            </dependency>
+
+            <!-- Other -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>1.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.8.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xerces</artifactId>
+                <version>2.4.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>3.5.1-Final</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.0-api</artifactId>
+                <version>1.0.0.Final</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jogamp.jogl</groupId>
+                <artifactId>jogl-all</artifactId>
+                <version>${jogl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jogamp.gluegen</groupId>
+                <artifactId>gluegen-rt-main</artifactId>
+                <version>${jogl.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${sl4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${sl4j.version}</version>
+            </dependency>
+
+            <!-- Test -->
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>2.0.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.1</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
     <repositories>
         <repository>
             <id>github</id>
@@ -223,6 +467,20 @@
             <name>GuiceyFruit Maven2 Repository</name>
             <url>http://guiceyfruit.googlecode.com/svn/repo/releases/</url>
         </repository>
+        <repository>
+            <id>jogamp</id>
+            <url>http://jogamp.org/deployment/maven</url>
+        </repository>
+        <repository>
+            <id>jboss</id>
+            <name>JBoss repository</name>
+            <url>http://repository.jboss.org/maven2</url>
+        </repository>
+        <repository>
+            <id>opencmis</id>
+            <name>Apache Repository</name>
+            <url>https://repository.apache.org/</url>
+        </repository>
     </repositories>
     <modules>
         <module>encontra-core-api</module>
@@ -237,8 +495,10 @@
         <module>encontra-image</module>
         <module>encontra-music</module>
         <module>encontra-metadata</module>
+        <module>encontra-3d</module>
         <!-- module>encontra-webapp</module -->
         <module>encontra-rest</module>
-  </modules>
+
+    </modules>
 
 </project>
