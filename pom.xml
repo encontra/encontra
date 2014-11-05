@@ -15,8 +15,8 @@
     </issueManagement>
 
     <ciManagement>
-        <system>drone.io</system>
-        <url>https://drone.io/github.com/encontra/encontra</url>
+        <system>CloudBees</system>
+        <url>https://encontra.ci.cloudbees.com/</url>
     </ciManagement>
 
     <mailingLists>
@@ -32,20 +32,15 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
-            <name>GitHub EnContRA Repository</name>
-            <url>https://raw.github.com/encontra/encontra/mvn-repo</url>
+            <id>encontra-snapshots</id>
+            <name>EnContRA Repository</name>
+            <url>http://repository-encontra.forge.cloudbees.com/snapshots</url>
         </repository>
-        <site>
-            <id>encontra.inevo.pt</id>
-            <url>scp://inevo.pt/var/www/encontra.inevo.pt/htdocs</url>
-        </site>
     </distributionManagement>
 
     <properties>
         <compileSource>1.7</compileSource>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <github.global.server>github</github.global.server>
         <jogl.version>2.2.0-rc-20140613</jogl.version>
         <lucene.version>3.0.2</lucene.version>
         <lire.version>0.8</lire.version>
@@ -73,40 +68,6 @@
                     <target>${compileSource}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo
-                    </altDeploymentRepository>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.8</version>
-                <configuration>
-                    <message>Maven artifacts for ${project.artifactId} - ${project.version}</message>
-                    <noJekyll>true</noJekyll>
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-                    <branch>refs/heads/mvn-repo</branch>
-                    <includes>
-                        <include>**/*</include>
-                    </includes>
-                    <repositoryName>encontra</repositoryName>
-                    <repositoryOwner>encontra</repositoryOwner>
-                    <merge>true</merge>
-                    <dryRun>true</dryRun>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <phase>deploy</phase>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -449,8 +410,12 @@
     </dependencyManagement>
     <repositories>
         <repository>
-            <id>github</id>
-            <url>https://raw.github.com/encontra/encontra/mvn-repo</url>
+            <id>encontra-snapshots</id>
+            <url>http://repository-encontra.forge.cloudbees.com/snapshots</url>
+        </repository>
+        <repository>
+            <id>encontra-3rdparty</id>
+            <url>http://repository-encontra.forge.cloudbees.com/3rdparty</url>
         </repository>
         <repository>
             <id>imagej</id>
