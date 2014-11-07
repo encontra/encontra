@@ -41,7 +41,7 @@
     <properties>
         <compileSource>1.7</compileSource>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jogl.version>2.2.0-rc-20140613</jogl.version>
+        <jogl.version>2.2.4</jogl.version>
         <lucene.version>3.0.2</lucene.version>
         <lire.version>0.8</lire.version>
         <cali.version>1.0</cali.version>
@@ -186,6 +186,16 @@
             <dependency>
                 <groupId>pt.inevo.encontra</groupId>
                 <artifactId>encontra-metadata-psd</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-3d-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pt.inevo.encontra</groupId>
+                <artifactId>encontra-3d-descriptors</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -371,7 +381,7 @@
 
             <dependency>
                 <groupId>org.jogamp.jogl</groupId>
-                <artifactId>jogl-all</artifactId>
+                <artifactId>jogl-all-main</artifactId>
                 <version>${jogl.version}</version>
             </dependency>
             <dependency>
