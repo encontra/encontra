@@ -34,7 +34,7 @@
         <repository>
             <id>encontra-snapshots</id>
             <name>EnContRA Repository</name>
-            <url>http://repository-encontra.forge.cloudbees.com/snapshots</url>
+            <url>http://repository-encontra.forge.cloudbees.com/snapshot</url>
         </repository>
     </distributionManagement>
 
@@ -421,7 +421,7 @@
     <repositories>
         <repository>
             <id>encontra-snapshots</id>
-            <url>http://repository-encontra.forge.cloudbees.com/snapshots</url>
+            <url>http://repository-encontra.forge.cloudbees.com/snapshot</url>
         </repository>
         <repository>
             <id>encontra-3rdparty</id>
@@ -429,7 +429,7 @@
         </repository>
         <repository>
             <id>imagej</id>
-            <url>http://maven.imagej.net/content/repositories/releases</url>
+            <url>http://maven.imagej.net/content/repositories/release</url>
         </repository>
         <repository>
             <id>Akka</id>
